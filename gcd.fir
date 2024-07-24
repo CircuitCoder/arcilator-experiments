@@ -16,7 +16,7 @@ circuit gcd :
     reg working : UInt<1>, clk with :
       reset => (rst, UInt<1>("h0"))
 
-    node done = and(eq(larger, UInt<64>("h0")), working)
+    node done = and(eq(smaller, UInt<64>("h0")), working)
 
     node na = mux(working, sub(larger, smaller), in_a)
     node nb = mux(working, smaller, in_b)
@@ -26,7 +26,7 @@ circuit gcd :
 
     node nworking = mux(working, not(done), in_valid)
 
-    out <= smaller
+    out <= larger
     out_valid <= done
     in_ready <= not(working)
 
