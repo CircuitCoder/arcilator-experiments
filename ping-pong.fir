@@ -3,6 +3,7 @@ circuit pingpong :
   module pingpong :
     input clk : Clock
     input rst : UInt<1>
+    output no_dce : UInt<1>
 
     inst shifter_l of shifter
     inst shifter_r of shifter
@@ -14,6 +15,8 @@ circuit pingpong :
 
     shifter_l.in <= shifter_r.out
     shifter_r.in <= shifter_l.out
+
+    no_dce <= shifter_r.out
 
   module shifter :
     input clk : Clock
